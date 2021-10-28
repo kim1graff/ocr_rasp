@@ -52,6 +52,8 @@ config = r'--oem 3 --psm 3'
 data = pytesseract.image_to_data(img, lang='eng+rus', config=config)
 
 words_json = {}
+allWords = []
+page_number = 1
 
 for i, el in enumerate(data.splitlines()):
 
@@ -66,13 +68,16 @@ for i, el in enumerate(data.splitlines()):
     height = float(word_info[9])
     width = float(word_info[8])
 
-    word_coord = {"word": word_info[11],
+    word_coord = {"textline": word_info[11],
                   "x1": left,
                   "y1": top + height,
                   "x2": left + width,
-                  "y2": top}
+                  "y2": top,
+                  "page": page_number}
 
-    words_json["_" + str(i)] = word_coord
+    allWords.append(word_coord)
+
+words_json["recognition"] = allWords
 
 with open(output_value, "w") as write_file:
     json.dump(words_json, write_file, indent=4)
