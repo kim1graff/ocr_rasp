@@ -25,7 +25,7 @@ except getopt.error as err:
     print("Не удалось распознать параметры")
     sys.exit(2)
 
-# Для тестов
+# Для тестов. Раскомментировать для запуска.
 # input_value = 'D:\\Work\\recognition\\тестирование\\frompdf.png'
 # output_value = 'D:\\Work\\recognition\\тестирование\\log.json'
 
